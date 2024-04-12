@@ -1,35 +1,29 @@
-# Train CIFAR10 with PyTorch
+# CIFAR10 Training with PyTorch and GradCAM Visualization
 
-I'm playing with [PyTorch](http://pytorch.org/) on the CIFAR10 dataset.
+This repository demonstrates the implementation of ResNet18 on the CIFAR10 dataset using PyTorch. Additionally, it includes visualization of GradCAM (Gradient-weighted Class Activation Mapping) on misclassified outputs.
 
-## Prerequisites
-- Python 3.6+
-- PyTorch 1.0+
+## Files
 
-## Training
-```
-# Start training with: 
-python main.py
+### `utils.py`
+- [Link to utils.py](https://github.com/11kartheek/cifar/blob/main/utils.py)
+- **Description:** `utils.py` contains helper functions and variables such as:
+  - Train transforms
+  - Test transforms
+  - Misclassified images helper function
+  - Plot loss function
+  - Visualize GradCAM function
 
-# You can manually resume the training with: 
-python main.py --resume --lr=0.01
-```
+### `main.py`
+- [Link to main.py](https://github.com/11kartheek/cifar/blob/main/main.py)
+- **Description:** `main.py` serves as the main script for training the ResNet18 model. It includes functions like:
+  - Train-test split
+  - Train loop
 
-## Accuracy
-| Model             | Acc.        |
-| ----------------- | ----------- |
-| [VGG16](https://arxiv.org/abs/1409.1556)              | 92.64%      |
-| [ResNet18](https://arxiv.org/abs/1512.03385)          | 93.02%      |
-| [ResNet50](https://arxiv.org/abs/1512.03385)          | 93.62%      |
-| [ResNet101](https://arxiv.org/abs/1512.03385)         | 93.75%      |
-| [RegNetX_200MF](https://arxiv.org/abs/2003.13678)     | 94.24%      |
-| [RegNetY_400MF](https://arxiv.org/abs/2003.13678)     | 94.29%      |
-| [MobileNetV2](https://arxiv.org/abs/1801.04381)       | 94.43%      |
-| [ResNeXt29(32x4d)](https://arxiv.org/abs/1611.05431)  | 94.73%      |
-| [ResNeXt29(2x64d)](https://arxiv.org/abs/1611.05431)  | 94.82%      |
-| [SimpleDLA](https://arxiv.org/abs/1707.064)           | 94.89%      |
-| [DenseNet121](https://arxiv.org/abs/1608.06993)       | 95.04%      |
-| [PreActResNet18](https://arxiv.org/abs/1603.05027)    | 95.11%      |
-| [DPN92](https://arxiv.org/abs/1707.01629)             | 95.16%      |
-| [DLA](https://arxiv.org/pdf/1707.06484.pdf)           | 95.47%      |
+### `models Folder`
+- [link to resnet] (https://github.com/11kartheek/cifar/blob/main/models/resnet.py)
+- **Description:** This folder contains various models, including ResNet18.
+
+### `s11.ipynb`
+- [Link to s11 notebook](https://github.com/11kartheek/cifar/blob/main/KartheekB_s11.ipynb)
+- **Description:** `s11.ipynb` is a Jupyter notebook that provides a step-by-step walkthrough of the functions, showcasing misclassified images and corresponding GradCAM images.
 
