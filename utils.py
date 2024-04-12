@@ -130,15 +130,17 @@ def plot_misclassified_images(
         )
     plt.savefig('mis.png')
     plt.show()
+    plt.close()
 
 
 from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.image import show_cam_on_image
 
-
 def visualize_gradcam(
     model, device, misclassified_images, misclassified_predictions, target_classes
 ):
+    
+    plt.figure(figsize=(20, 10))
     for i, (image, pred, target) in enumerate(
         zip(misclassified_images, misclassified_predictions, target_classes)
     ):
@@ -157,18 +159,17 @@ def visualize_gradcam(
         visualization = show_cam_on_image(image.transpose(1, 2, 0), grayscale_cam[0])
 
         # Plot Grad-CAM
-        plt.figure(figsize=(4, 2))
-        plt.subplot(1, 2, 1)
+        plt.subplot(2, 10, 2*i+1)
         plt.imshow(image.transpose(1, 2, 0))
-        plt.title(f"Predicted Class: {classes[int(pred)]}")
+        plt.title(f"Pred:{classes[int(pred)]}")
         plt.axis("off")
 
-        plt.subplot(1, 2, 2)
+        plt.subplot(2, 10, 2*i+2)
         plt.imshow(visualization)
-        plt.title(f"Grad-CAM on image {i}")
+        plt.title(f"Grad-CAM {i}")
         plt.axis("off")
 
-        plt.tight_layout()
-        plt.savefig('cam.png')
-
-        plt.show()
+#         plt.tight_layout()
+    plt.savefig('cam.png', bbox_inches='tight')
+    plt.show()
+    plt.close()
