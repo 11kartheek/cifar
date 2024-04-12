@@ -164,6 +164,7 @@ def loop(
     device=device,
     optimizer=optimizer,
     criterion=criterion,
+    scheduler=scheduler,
 ):
     train_losses = []
     test_losses = []
@@ -180,6 +181,7 @@ def loop(
         test_losses.append(loss)
         test_acc.append(acc)
         scheduler.step()
+    return train_losses, test_losses, train_acc, test_acc
 
 
 # loop(args.num_epochs)
