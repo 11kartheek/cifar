@@ -3,7 +3,6 @@
 import argparse
 import os
 
-import datasets
 import torch
 import torch.backends.cudnn as cudnn
 import torch.nn as nn
@@ -11,9 +10,10 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
+from torchvision import datasets, transforms
 
 from models import *
-from utils import transform_test, transform_train
+from utils import test_transforms, train_transforms
 
 # parser = argparse.ArgumentParser(description="PyTorch CIFAR10 Training")
 # parser.add_argument("--lr", default=0.1, type=float, help="learning rate")
@@ -47,7 +47,7 @@ class Cifar10SearchDataset(datasets.CIFAR10):
         return image, label
 
 
-def TestTrainSplit(transform_train, transform_test):
+def TestTrainSplit(transform_train, transform_test, batch_size=512):
     trainset = Cifar10SearchDataset(
         "./data", train=True, download=True, transform=transform_train
     )
@@ -56,11 +56,11 @@ def TestTrainSplit(transform_train, transform_test):
     )
 
     trainloader = torch.utils.data.DataLoader(
-        trainset, batch_size=128, shuffle=True, num_workers=2
+        trainset, batch_size=batch_size, shuffle=True, num_workers=2
     )
 
     testloader = torch.utils.data.DataLoader(
-        testset, batch_size=100, shuffle=False, num_workers=2
+        testset, batch_size=batch_size, shuffle=False, num_workers=2
     )
     return trainloader, testloader
 
@@ -165,10 +165,20 @@ def loop(
     optimizer=optimizer,
     criterion=criterion,
 ):
+    train_losses = []
+    test_losses = []
+    train_acc = []
+    test_acc = []
     for epoch in range(num_epochs):
         print("EPOCH:", epoch)
-        train(model, device, trainloader, optimizer=optimizer, criterion=criterion)
-        test(model, device, testloader)
+        loss, acc = train(
+            model, device, trainloader, optimizer=optimizer, criterion=criterion
+        )
+        train_losses.append(loss)
+        train_acc.append(acc)
+        loss, acc = test(model, device, testloader)
+        test_losses.append(loss)
+        test_acc.append(acc)
         scheduler.step()
 
 
