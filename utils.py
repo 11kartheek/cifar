@@ -128,6 +128,7 @@ def plot_misclassified_images(
             va="top",
             color="blue",
         )
+    plt.savefig('mis.png')
     plt.show()
 
 
@@ -168,4 +169,6 @@ def visualize_gradcam(
         plt.axis("off")
 
         plt.tight_layout()
+        plt.savefig('cam.png')
+
         plt.show()
