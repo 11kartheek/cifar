@@ -20,10 +20,10 @@ This repository demonstrates the implementation of ResNet18 on the CIFAR10 datas
   - Train loop
 
 ### `models Folder`
-- [link to resnet] (https://github.com/11kartheek/cifar/blob/main/models/resnet.py)
+- [link to resnet](https://github.com/11kartheek/cifar/blob/main/models/resnet.py)
 - **Description:** This folder contains various models, including ResNet18.
 
 ### `s11.ipynb`
-- [Link to s11 notebook](https://github.com/11kartheek/cifar/blob/main/KartheekB_s11.ipynb)
+- [Link to s11 notebook](https://github.com/11kartheek/cifar/blob/main/kartheekb_s11.ipynb)
 - **Description:** `s11.ipynb` is a Jupyter notebook that provides a step-by-step walkthrough of the functions, showcasing misclassified images and corresponding GradCAM images.
 
